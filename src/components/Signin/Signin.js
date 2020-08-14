@@ -8,14 +8,14 @@ class Signin extends React.Component {
 			signInPassword: '',
 		};
 	}
-	onEmailChange = event => {
+	handleEmailChange = event => {
 		this.setState({ signInEmail: event.target.value });
 	};
-	onPasswordChange = event => {
+	handlePasswordChange = event => {
 		this.setState({ signInPassword: event.target.value });
 	};
 
-	onSubmitSignIn = () => {
+	handleSubmitSignIn = () => {
 		fetch('http://localhost:3001/signin', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -45,7 +45,7 @@ class Signin extends React.Component {
 									</label>
 									<input
 										className='pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100'
-										onChange={this.onEmailChange}
+										onChange={this.handleEmailChange}
 										type='email'
 										name='email-address'
 										id='email-address'
@@ -58,7 +58,7 @@ class Signin extends React.Component {
 									<input
 										className='b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100'
 										type='password'
-										onChange={this.onPasswordChange}
+										onChange={this.handlePasswordChange}
 										name='password'
 										id='password'
 									/>
@@ -68,7 +68,7 @@ class Signin extends React.Component {
 								<input
 									className='b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib'
 									type='submit'
-									onClick={this.onSubmitSignIn}
+									onClick={this.handleSubmitSignIn}
 									value='Sign in'
 								/>
 							</div>
