@@ -8,12 +8,6 @@ import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Particles from 'react-particles-js';
-import Clarifai from 'clarifai';
-
-// https://docs.clarifai.com/api-guide/api-overview/api-clients
-const app = new Clarifai.App({
-	apiKey: 'ff2b1f97776341ed8569c85aa7a85889',
-});
 
 const particlesOptions = {
 	particles: {
@@ -86,9 +80,13 @@ class App extends React.Component {
 	onButtonSubmit = event => {
 		this.setState({ imageUrl: this.state.input });
 
-		// https://www.clarifai.com/models/face-detection-image-recognition-model-a403429f2ddf4b49b307e318f00e528b-detection
-		app.models
-			.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+		fetch('http://localhost:3001/facedetect', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ input: this.state.input }),
+			mode: 'cors',
+		})
+			.then(response => response.json())
 			.then(response => {
 				if (response) {
 					fetch('http://localhost:3001/image', {
@@ -100,6 +98,9 @@ class App extends React.Component {
 						.then(response => response.json())
 						.then(count => {
 							this.setState(Object.assign(this.state.user, { entries: count }));
+						})
+						.catch(err => {
+							console.log(err);
 						});
 				}
 				this.displayFaceBox(this.calculateFaceLocation(response));
