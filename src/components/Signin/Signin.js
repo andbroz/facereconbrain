@@ -1,4 +1,5 @@
 import React from 'react';
+import { BACKEND_SERVER_URL } from '../../constants';
 
 class Signin extends React.Component {
 	constructor(props) {
@@ -16,7 +17,7 @@ class Signin extends React.Component {
 	};
 
 	handleSubmitSignIn = () => {
-		fetch('https://obscure-bastion-88248.herokuapp.com/signin', {
+		fetch(`${BACKEND_SERVER_URL}/signin`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ email: this.state.signInEmail, password: this.state.signInPassword }),

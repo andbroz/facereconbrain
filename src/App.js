@@ -8,6 +8,7 @@ import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Particles from 'react-particles-js';
+import { BACKEND_SERVER_URL } from './constants';
 
 const particlesOptions = {
 	particles: {
@@ -80,7 +81,7 @@ class App extends React.Component {
 	onButtonSubmit = event => {
 		this.setState({ imageUrl: this.state.input });
 
-		fetch('https://obscure-bastion-88248.herokuapp.com//facedetect', {
+		fetch(`${BACKEND_SERVER_URL}/facedetect`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ input: this.state.input }),
@@ -89,7 +90,7 @@ class App extends React.Component {
 			.then(response => response.json())
 			.then(response => {
 				if (response) {
-					fetch('https://obscure-bastion-88248.herokuapp.com//image', {
+					fetch(`${BACKEND_SERVER_URL}/image`, {
 						method: 'PUT',
 						headers: { 'Content-Type': 'application/json' },
 						body: JSON.stringify({ id: this.state.user.id }),

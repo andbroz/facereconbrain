@@ -1,4 +1,5 @@
 import React from 'react';
+import { BACKEND_SERVER_URL } from '../../constants';
 
 class Register extends React.Component {
 	constructor(props) {
@@ -23,7 +24,7 @@ class Register extends React.Component {
 	};
 
 	handleRegister = () => {
-		fetch('https://obscure-bastion-88248.herokuapp.com//register', {
+		fetch(`${BACKEND_SERVER_URL}/register`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ email: this.state.email, password: this.state.password, name: this.state.name }),
