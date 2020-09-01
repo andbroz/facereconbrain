@@ -80,7 +80,7 @@ class App extends React.Component {
 	onButtonSubmit = event => {
 		this.setState({ imageUrl: this.state.input });
 
-		fetch('http://localhost:3001/facedetect', {
+		fetch('https://obscure-bastion-88248.herokuapp.com//facedetect', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ input: this.state.input }),
@@ -89,7 +89,7 @@ class App extends React.Component {
 			.then(response => response.json())
 			.then(response => {
 				if (response) {
-					fetch('http://localhost:3001/image', {
+					fetch('https://obscure-bastion-88248.herokuapp.com//image', {
 						method: 'PUT',
 						headers: { 'Content-Type': 'application/json' },
 						body: JSON.stringify({ id: this.state.user.id }),

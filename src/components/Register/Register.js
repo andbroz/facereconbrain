@@ -23,7 +23,7 @@ class Register extends React.Component {
 	};
 
 	handleRegister = () => {
-		fetch('http://localhost:3001/register', {
+		fetch('https://obscure-bastion-88248.herokuapp.com//register', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ email: this.state.email, password: this.state.password, name: this.state.name }),
